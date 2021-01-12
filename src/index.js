@@ -1,20 +1,30 @@
 const boardElm = document.getElementById("board")
 const scoreElm = document.getElementById("score")
+const msgElm = document.getElementById("msg")
 
 const colors = {R: "#e74c3c", G: "#27ae60", B: "#3498db", O: "#f39c12"}
 
 class Board {
-    constructor(boardElm, scoreElm) {
+    constructor(boardElm, scoreElm,msgElm) {
         this.boardElm = boardElm
         this.scoreElm = scoreElm
-        this.initColumnsCount = 6
+        this.msgElm = msgElm
+        this.initColumnsCount = 8
         this.initRowsCount = 4
+        this.gameOverRow = 13
         this.rowsCount = 0
         this.columns = []
         this.currentColor = null
         this.score = 0
-        this.readyToBoomCounter = 0
+        this.readyToBoomCounter = 0;
 
+
+        const boardHeight = Math.floor(window.innerHeight * .7)
+        const dimension = Math.floor(boardHeight / this.gameOverRow)
+
+        this.boardElm.style.setProperty("--dimension", dimension + "px")
+        this.boardElm.style.width = (this.initColumnsCount * (dimension * 1.1)) + "px"
+        this.boardElm.style.height = boardHeight + "px"
     }
 
     start() {
@@ -40,7 +50,7 @@ class Board {
     }
 
     cellClick(target) {
-        if (!target || target.readyToBoom) return;
+        if (this.gameover || !target || target.readyToBoom) return;
 
         if (this.isSingleCell(target)) return;
 
@@ -126,13 +136,39 @@ class Board {
     }
 
     updateCellsPositions() {
+
+        this.rowsCount = 0
+
         this.columns
             .forEach((column, colIndex) => {
                 column.cells.map((cell, rowIndex) => {
                     cell.updatePosition({col: colIndex, row: rowIndex})
                     return cell
                 })
+
+                if (column.cells.length > this.rowsCount) {
+                    this.rowsCount = column.cells.length
+
+                    if (this.rowsCount >= this.gameOverRow) {
+                        // this.gameover = true;
+                        // this.boomBoard()
+                    }
+                }
+
             })
+    }
+
+    boomBoard() {
+        this.columns.forEach(column => {
+            column.cells.forEach(cell => {
+                cell.destroy()
+                this.playFxSounds()
+            })
+        })
+
+        this.scoreElm.innerText = ''
+        this.showMessage(`Boom Overs :( \nScore: ${this.score}`)
+        this.columns = []
     }
 
     calcScore() {
@@ -208,6 +244,10 @@ class Board {
 
     showScore() {
         this.scoreElm.innerText = `SCORE: ${this.score}`
+    }
+
+    showMessage(inner){
+        this.msgElm.innerHTML = inner
     }
 
 }
@@ -286,7 +326,7 @@ class Cell {
     }
 }
 
-const board = new Board(boardElm, scoreElm);
+const board = new Board(boardElm, scoreElm, msgElm);
 
 console.log(board);
 board.start()

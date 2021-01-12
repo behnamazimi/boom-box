@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boom Box</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        #board {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+            transition: all 0.15s ease-out;
+            width: 528px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        #board > div {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            transition: all 1s linear;
+        }
+
+        #board button.cell {
+            --col: 0;
+            --row: 0;
+            background-color: #555;
+            color: #fff;
+            outline: none;
+            min-width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 5px;
+            margin: 3px;
+            cursor: pointer;
+            transition: all .15s ease-out;
+            animation: raise 0.3s .2s ease-in;
+            position: absolute;
+            left: calc(65px * var(--col, 0));
+            bottom: calc(65px * var(--row, 0));
+        }
+
+        #board button.cell:before,
+        #board button.cell:after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            z-index: 1;
+            width: 80%;
+            height: 80%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            left: 10%;
+            top: 10%;
+        }
+
+        #board button.cell:after {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transform: rotate(45deg);
+            left: 25%;
+            top: 25%;
+            width: 50%;
+            height: 50%;
+        }
+
+        #board button.cell:hover {
+            transform: scale(.9);
+        }
+
+        #board button.cell.boom {
+            animation: box-boom .2s ease forwards;
+            z-index: 10;
+        }
+
+        #score {
+            text-align: center;
+        }
+
+        @keyframes box-boom {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            35% {
+                transform: scale(1.5) rotate(360deg);
+                opacity: .9;
+            }
+            100% {
+                transform: scale(2) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes raise {
+            0% {
+                transform: scale(0) translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) translateY(0px);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="board"></div>
+<h2 id="score">Score: 0</h2>
+<script src="index.js"></script>
+</body>
+</html>

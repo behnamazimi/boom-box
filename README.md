@@ -2,6 +2,8 @@
 
 Pretty simple JS game made just for fun.
 
+[**Play Now**](https://behnamazimi.github.io/boom-box/)
+
 ### How to run locally
 
 ```

@@ -1,0 +1,24 @@
+{
+  "name": "boom-box",
+  "version": "1.0.0",
+  "description": "A pretty simple JS game. Just Boom :)",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html --open",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/behnamazimi/boom-box.git"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/behnamazimi/boom-box/issues"
+  },
+  "homepage": "https://github.com/behnamazimi/boom-box#readme"
+}

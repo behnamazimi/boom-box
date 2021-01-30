@@ -2,7 +2,7 @@
   "name": "boom-box",
   "version": "1.0.0",
   "description": "A pretty simple JS game. Just Boom :)",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "parcel src/index.html --open",
     "build": "parcel build src/index.html"
@@ -15,7 +15,7 @@
     "parcel-bundler": "^1.12.4"
   },
   "keywords": [],
-  "author": "",
+  "author": "Behnam Azimi",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/behnamazimi/boom-box/issues"

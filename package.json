@@ -1,7 +1,7 @@
 {
   "name": "boom-box",
   "version": "1.0.0",
-  "description": "A pretty simple JS game. Just Boom :)",
+  "description": "Pretty simple JS game. Just Boom :)",
   "main": "src/index.js",
   "scripts": {
     "start": "parcel src/index.html --open",

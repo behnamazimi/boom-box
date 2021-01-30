@@ -1,0 +1,206 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Potta One', cursive;
+}
+
+body {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: #efefef;
+    background: linear-gradient(0deg, transparent, #afc3ff);
+    background-attachment: fixed;
+    overflow: hidden;
+    user-select: none;
+}
+
+#board {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    transition: all 0.15s ease-out;
+    width: 0;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    color: #555;
+}
+
+#board:after {
+    content: "";
+    display: block;
+    width: 130%;
+    height: 5%;
+    border-top: 3px solid #555555;
+    position: absolute;
+    top: 0;
+    left: -15%;
+    border-radius: 50%;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+#board > div {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    transition: all 1s linear;
+}
+
+#board button.cell {
+    --col: 0;
+    --row: 0;
+    background-color: #555;
+    color: #fff;
+    outline: none;
+    min-width: var(--dimension, 30px);
+    height: var(--dimension, 30px);
+    border: none;
+    border-radius: 5px;
+    margin: 3px;
+    cursor: pointer;
+    transition: all .15s ease-out;
+    animation: raise 0.3s .2s ease-in forwards;
+    position: absolute;
+    left: calc((var(--dimension) + (var(--dimension) * 0.1)) * var(--col, 0));
+    bottom: calc((var(--dimension) + (var(--dimension) * 0.1)) * var(--row, 0));
+    opacity: 0;
+}
+
+#board button.cell:before,
+#board button.cell:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    width: 80%;
+    height: 80%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    left: 10%;
+    top: 10%;
+}
+
+#board button.cell:after {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transform: rotate(45deg);
+    left: 25%;
+    top: 25%;
+    width: 50%;
+    height: 50%;
+}
+
+#board button.cell.boom {
+    animation: box-boom .2s ease forwards;
+    z-index: 10;
+}
+
+#score {
+    text-align: center;
+}
+
+#msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    white-space: pre-line;
+    text-align: center;
+    line-height: 1.75;
+    color: #3450db;
+    width: 100%;
+}
+
+@keyframes box-boom {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    35% {
+        transform: scale(1.5) rotate(360deg);
+        opacity: .9;
+    }
+    100% {
+        transform: scale(2) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+@keyframes raise {
+    0% {
+        transform: scale(0) translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0px);
+        opacity: 1;
+    }
+}
+
+/******************/
+
+.cloud {
+    background: #fff;
+    background: linear-gradient(top, #fff 5%, #f1f1f1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#f1f1f1', GradientType=0);
+    border-radius: 100px;
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    height: 120px;
+    position: absolute;
+    top: 1rem;
+    left: 5rem;
+    width: 350px;
+}
+
+.cloud:after, .cloud:before {
+    background: #fff;
+    content: '';
+    position: absolute;
+    z-indeX: -1;
+}
+
+.cloud:after {
+    border-radius: 100px;
+    height: 100px;
+    left: 50px;
+    top: -50px;
+    width: 100px;
+}
+
+.cloud:before {
+    border-radius: 63% 53% 56% 50% / 69% 55% 60% 50%;
+    width: 180px;
+    height: 140px;
+    right: 50px;
+    top: -90px;
+}
+
+.cloud.x1 {
+    opacity: .7;
+    transform: scale(0.4);
+}
+
+.cloud.x2 {
+    left: unset;
+    right: 5rem;
+    top: 25%;
+    opacity: .9;
+    transform: scale(0.6);
+}
+
+
+.cloud.x3 {
+    top: unset;
+    left: 10%;
+    bottom: 35%;
+    opacity: .7;
+    transform: scale(0.7);
+}

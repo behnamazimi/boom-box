@@ -1,6 +1,6 @@
 {
   "name": "boom-box",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pretty simple JS game. Just Boom :)",
   "main": "src/index.js",
   "scripts": {

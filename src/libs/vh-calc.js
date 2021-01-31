@@ -8,5 +8,5 @@ function calcVH() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
-
+calcVH()
 window.addEventListener('resize', calcVH);
